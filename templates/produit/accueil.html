@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<br>
+<div class="row">
+    <div class="col-md-5">
+        <h5>Clients:</h5>
+        <hr>
+        <div class="card card-body">
+            <a class="btn btn-primary  btn-sm btn-block" href="">Créer Un Client</a>
+            <table class="table table-sm">
+                <tr>
+                    <th>ID</th>
+                    <th>Clients</th>
+                    <th>Telephone</th>
+                    <th>Détails</th>
+                </tr>
+                {% for client in clients %}
+                <tr>
+
+                    <td><a href="{% url 'client:list_client' client.id %}"> {{ client.id }}</a></td>
+                    <td>{{ client.name }}</td>
+                    <td>{{ client.phone_number }}</td>
+                    <td><a class="btn btn-sm btn-success" href="{% url 'client:list_client' client.id %}">Détails </a>
+                    </td>
+
+                </tr>
+                {% endfor%}
+
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <h5>Toutes les Comamndes</h5>
+        <hr>
+        <div class="card card-body">
+            <a class="btn btn-primary  btn-sm btn-block" href="{% url 'commande:ajouter_commande' %}">Ajouter une
+                Commande</a>
+            <table class="table table-sm">
+                <tr>
+                    <th>Produit</th>
+                    <th>Client</th>
+                    <th>Status</th>
+                    <th> Date</th>
+                    <th> Mise à Jour</th>
+                    <th>Supprimer</th>
+                </tr>
+                {% for commande in commandes %}
+                <tr>
+                    <td>{{ commande.produit }}</td>
+                    <td>{{ commande.client }}</td>
+                    <td>{{ commande.status }}</td>
+                    <td>{{ commande.created_at }}</td>
+                    <td><a href="{% url 'commande:modifier_commande' commande.id %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                        </svg>
+                    </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'commande:supprimer_commande' commande.id %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-trash" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                <path fill-rule="evenodd"
+                                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            </svg>
+                        </a>
+                    </td>
+
+
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock content%}
